@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="utf-8">
+        <title>Adöin Panel - Biletler</title>
+    </head>
+    <body> 
+        <h1>Tüm Destek Biletleri (Admin Paneli)</h1>
+
+        {% for bilet in biletler%}
+            <div style ="border: 1px solid #ccc; padding:10px; margin-bottom: 10px;">
+            <h3>{{ bilet.subject}} ({{ bilet.status }})</h3>
+            <p>{{ bilet.description }}</p>
+            <small> Oluşturma: {{ bilet.created_at }}</small>
+            <form method="POST" action=""{{ulr_for('bilet_durum_guncelle', bilet_id=bilet.id)}}>
+                <select name="status">
+                    <option value="Açık" {% if bilet.status =='Açık' %}selected{% endif %}>Açık</option>
+                    <option value="Yanıtlandı" {% if bilet.status =='Yanıtlandı' %}selected{% endif %}>Yanıtlandı</option>
+                    <option value="Kapalı" {% if bilet.status =='Kapalı' %}selected{% endif %}>Kapalı</option>
+                </select>
+                <button type="submit">Güncelle</button>
+            </form>
+            </div>
+                {% else %}
+                <p>Henüz hiç biletiniz yok.</p>
+            {% endfor %}
+    </body>
+</html>
