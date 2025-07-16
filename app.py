@@ -7,10 +7,12 @@ from forms import TicketForm, LoginForm, RegisterForm
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask.cli import with_appcontext
-import click
+import click, os
+
+basedir=os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)  
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.db')
 app.config['SECRET_KEY'] = 'gizli-anahtar'
 
 db.init_app(app)
