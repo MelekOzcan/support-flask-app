@@ -2,7 +2,7 @@ from flask import Flask, abort, render_template, redirect, url_for, flash, reque
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, current_user, login_user, logout_user
 from flask_migrate import Migrate
-from models import Ticket, db, User
+from models import db, User, Ticket
 from forms import TicketForm, LoginForm, RegisterForm
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -12,7 +12,7 @@ import click, os
 basedir=os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)  
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance', 'data.db')
 app.config['SECRET_KEY'] = 'gizli-anahtar'
 
 db.init_app(app)
