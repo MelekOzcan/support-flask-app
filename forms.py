@@ -1,14 +1,20 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, PasswordField
-from wtforms.validators import DataRequired
+from wtforms import StringField, TextAreaField, SubmitField, PasswordField, EmailField
+from wtforms.validators import DataRequired, Length
 
 
 class LoginForm(FlaskForm):
-    usssername= StringField('Kullanıcı Adı', validators=[DataRequired()])
-    password = PasswordField('Şifre', validators = [DataRequired()])
+    username= StringField('Kullanıcı Adı', validators=[DataRequired(message="Kullanıcı adı gerekli.")])
+    password = PasswordField('Şifre', validators = [DataRequired(message="Şİfre gerekli.")])
     submit = SubmitField('Giriş Yap')
 
 class TicketForm(FlaskForm):
-    subject = StringField('Konu', validators=[DataRequired()])
-    description = TextAreaField('Açıklama', validators=[DataRequired()])
+    subject = StringField('Konu', validators=[DataRequired(), Length(max=150)])
+    description = TextAreaField('Açıklama', validators=[DataRequired(), Length(max=1000)])
     submit = SubmitField('Bileti Gönder')
+
+
+class RegisterForm(FlaskForm):
+    username=StringField('Kullanıcı Adı', validators=[DataRequired(message="Kullanıcı adı gerekli."), Length(min=3, max=150)])
+    password= PasswordField('Şifre', validators=[DataRequired(message=("Şifre gerekli.")), Length(min=6)])
+    submit= SubmitField('Kayıt Ol')

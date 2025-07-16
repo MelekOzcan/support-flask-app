@@ -10,13 +10,15 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    def __repr__(self):
+        return f"<User {self.username}>"
+    
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title= db.Column(db.Integer,primary_key=True)
     subject = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text, nullable=False)
     status = db.Column(db.String(20), default='Açık')  
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     user = db.relationship('User', backref='tickets')

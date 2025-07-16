@@ -11,7 +11,7 @@
     </div>
     <div class="mb-3">
         {{ form.description.label(class="form-label") }}
-        {{ form.subject(class="form-control") }}
+        {{ form.description(class="form-control") }}
     </div>
     {{ form.submit(class="btn btn-primary") }}
 </form>
@@ -19,17 +19,23 @@
 <hr>
 
 <h2>My Tickets</h2>
+
+<p>
+    <span class="badge bg-warning">Açık</span>
+    <span class="badge bg-info">Yanıtlandı</span>
+    <span class="badge bg-success">Kapalı</span>
+</p>
 {% for ticket in tickets %}
 <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">{{ ticket.subject }}</h5>
         <h6>
             <span class="badge 
-            {% if tickets.status == 'Açık' %}bg-warning
-            {% elif ticket.status == 'Yanıtlanıdı' %}bg-info
-            {% elif ticket .status == 'Kapalı' %}bg-success
+            {% if ticket.status == 'Açık' %}bg-warning
+            {% elif ticket.status == 'Yanıtlandı' %}bg-info
+            {% elif ticket.status == 'Kapalı' %}bg-success
             {% endif %}">
-                {{ ticket status }}
+                {{ ticket.status }}
             </span>
         </h6>
         <p class="card-text">{{ticket.description}}</p>
