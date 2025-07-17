@@ -1,3 +1,7 @@
+import os 
+
+basedir=os.path.abspath(os.path.dirname(__file__))
+
 from flask import Flask, abort, render_template, redirect, url_for, flash, request, session 
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, current_user, login_user, logout_user
@@ -7,9 +11,7 @@ from forms import TicketForm, LoginForm, RegisterForm
 from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask.cli import with_appcontext
-import click, os
-
-basedir=os.path.abspath(os.path.dirname(__file__))
+import click 
 
 app = Flask(__name__)  
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance', 'data.db')
@@ -131,6 +133,11 @@ def register():
 
 @app.route("/")
 def index():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            return redirect(url_for('admin_tickets'))
+        else:
+            return redirect(url_for('tickets'))
     return redirect(url_for('login'))
 
 @app.cli.command("create-sample-users")
