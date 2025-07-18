@@ -1,4 +1,9 @@
+instance/data.db
 __pycache__/
-venv/
-instance/
+.env
 *.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.DS_Store
+.vscode/
