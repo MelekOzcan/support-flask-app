@@ -12,6 +12,14 @@ Admins can view all tickets and update their status (Open, Answered, Closed).
 - Bootstrap UI
 - Deploy-ready (Render.com)
 
+### Superadmin Features
+
+- Access to a comprehensive dashboard overview.
+- View total number of tickets, users, and admins.
+- Monitor ticket statuses: Open, Answered, Closed.
+- Review the latest tickets and recently added admin users.
+
+
 ## 🚀 Live Demo
 https://supportticketapp.onrender.com
 
