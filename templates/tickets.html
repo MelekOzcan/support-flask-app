@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
-{% block title %}MyTicket{% endblock %}
+{% block title %}Biletlerim{% endblock %}
 
 {% block content %}
-<h2>New Ticket</h2>
+<h2>Yeni Bilet</h2>
 <form method="POST">
     {{ form.hidden_tag() }}
     <div class="mb-3">
@@ -23,7 +23,7 @@
 <p>
     <span class="badge bg-warning">Açık</span>
     <span class="badge bg-info">Yanıtlandı</span>
-    <span class="badge bg-success">Kapalı</span>
+    <span class="badge bg-success">Kapandı</span>
 </p>
 {% for ticket in tickets %}
 <div class="card mb-3">
@@ -33,16 +33,16 @@
             <span class="badge 
             {% if ticket.status == 'Açık' %}bg-warning
             {% elif ticket.status == 'Yanıtlandı' %}bg-info
-            {% elif ticket.status == 'Kapalı' %}bg-success
+            {% elif ticket.status == 'Kapandı' %}bg-success
             {% endif %}">
                 {{ ticket.status }}
             </span>
         </h6>
         <p class="card-text">{{ticket.description}}</p>
-        <small class="text-muted">Created: {{ ticket.created_at }}</small>
+        <small class="text-muted">Oluşturulma: {{ ticket.created_at }}</small>
     </div>
 </div>
 {% else %}
-    <p>You have no tickets yet.</p>
+    <p>Henüz biletiniz bulunmamaktadır.</p>
 {% endfor %}
 {% endblock %}

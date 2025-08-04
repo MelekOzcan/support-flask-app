@@ -18,3 +18,15 @@ class RegisterForm(FlaskForm):
     username=StringField('Kullanıcı Adı', validators=[DataRequired(message="Kullanıcı adı gerekli."), Length(min=3, max=150)])
     password= PasswordField('Şifre', validators=[DataRequired(message=("Şifre gerekli.")), Length(min=6)])
     submit= SubmitField('Kayıt Ol')
+
+class AdminResponseForm(FlaskForm):
+    description = TextAreaField('Yanıt', validators=[DataRequired(), Length(max=1000)])
+    submit = SubmitField('Yanıtı Gönder')
+
+class UserReplyForm(FlaskForm):
+    description = TextAreaField('Kullanıcı Yanıtı', validators=[DataRequired(), Length(max=1000)])
+    submit = SubmitField('Kullanıcı Yanıtını Gönder')
+
+class MessageForm(FlaskForm):
+    content = TextAreaField("Mesajınız", validators=[DataRequired()])
+    submit = SubmitField("Gönder")

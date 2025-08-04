@@ -1,0 +1,38 @@
+<h2>Bilet: {{ ticket.subject }}</h2>
+<p>Durum: {{ ticket.status }}</p>
+
+<hr>
+<h4>Mesajlar:</h4>
+{% if messages %}
+    {% for msg in messages %}
+        <div class="mb-2">
+            <strong>{{ msg.sender.username }}</strong>
+            <small>({{ msg.timestamp.strftime('%Y-%m-%d %H:%M') }})</small>
+            <p>{{ msg.content }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Henüz mesaj yok.</p>
+{% endif %}
+
+{% if not current_user.is_admin and ticket.status=="Yanıtlandı" %}
+<form method="POST" action="{{ url_for('user_close_ticket', ticket_id=ticket.id) }}" class="mt-3">
+    <label><strong>Sorununuz çözüldü mü?</strong></label><br>
+    <button type="submit" name="cevap" value="evet" class="btn btn-success btn-sm">Evet</button>
+    <button type="submit" name="cevap" value="hayir" class="btn btn-secondary btn-sm">Hayır</button>
+</form>
+{% endif %}
+
+<h4>Yeni Mesaj Gönder:</h4>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.content.label(class="form-label") }}
+        {{ form.content(class="form-control", rows=4) }}
+        {% for error in form.content.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
